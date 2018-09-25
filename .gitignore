@@ -1,0 +1,10 @@
+DjangoEnv
+Migrations_basic_app.bat
+runServer.bat
+runVenv.bat
+django_project/db.sqlite3
+django_project/blog/__pycache__
+django_project/blog/migrations
+django_project/django_project/__pycache__
+django_project/users/__pycache__
+django_project/users/migrations

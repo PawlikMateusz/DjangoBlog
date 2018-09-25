@@ -1,0 +1,30 @@
+{% extends "blog/base.html" %}
+{% block content %}
+
+
+<h1>Post List:</h1>
+<ul>
+    {% for post in object_list %}
+    <li>
+        <h4>
+            <a href="{% url 'blog:post_detail' pk=post.pk %}">{{ post.title }}
+                {% if post.author == user %}
+                <i class="fas fa-edit"></i>
+                {% endif %}
+            </a>
+        </h4>
+        <ul>
+            <li>
+                {{ post.content }}
+            </li>
+            <li>
+                {{ post.date_posted|date:"d.m.Y, H:i" }}
+            </li>
+            <li>
+                <a href="{% url 'blog:userPostsView' pk=post.author.username %}">{{ post.author }}</a>
+            </li>
+        </ul>
+    </li>
+    {% endfor %}
+</ul>
+{% endblock content %}

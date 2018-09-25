@@ -1,0 +1,31 @@
+{% extends "blog/base.html" %}
+{% block content %}
+
+
+
+<ul>
+    <li>
+        <h4>
+            {{ object.title }}
+        </h4>
+        <ul>
+            <li>
+                {{ object.content }}
+            </li>
+            <li>
+                {{ object.date_posted }}
+            </li>
+            <li>
+                <a href="{% url 'blog:userPostsView' pk=object.author.username %}">{{ object.author }}</a>
+            </li>
+        </ul>
+    </li>
+</ul>
+{% if user.is_authenticated and object.author == user %}
+
+<a href="{% url 'blog:post_delete' pk=post.pk %}">Delete <i class="fas fa-trash-alt delete_icon"></i></a>
+<br>
+<a href="{% url 'blog:post_update' pk=post.pk %}">Update </a> <i class="fas fa-edit"></i>
+{% endif %}
+
+{% endblock content %}

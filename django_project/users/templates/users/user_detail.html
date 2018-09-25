@@ -1,0 +1,35 @@
+{% extends "blog/base.html" %}
+{% block content %}
+<ul>
+    <h4>
+        <img class='ProfilePic ' src="{{ user.profile.image.url }}" alt="User Photo"> <strong>{{ user.username }}</strong>
+    </h4>
+
+    <ul>
+        <li>
+            <strong>Join date</strong> <br>{{ user.date_joined }}
+        </li>
+        <li>
+            <strong>Last login date </strong><br>{{ user.last_login }}
+        </li>
+        {% if user.post_set.first %}
+        <li>
+            <strong> My posts:</strong>
+            <ul>
+                {% for post in user.post_set.all %}
+                <li>
+                    <a href="{% url 'blog:post_detail' pk=post.pk %}"> {{ post.title }} <i class="fas fa-edit"></i></a>
+                </li>
+                {% endfor %}
+
+            </ul>
+        </li>
+
+        {% else %}
+        <li>
+            <strong>User didnt wrire anything :/</strong>
+        </li>
+        {% endif %}
+    </ul>
+</ul>
+{% endblock content %}

@@ -23,9 +23,9 @@
 </ul>
 {% if user.is_authenticated and object.author == user %}
 
-<a href="{% url 'blog:post_delete' pk=post.pk %}">Delete <i class="fas fa-trash-alt delete_icon"></i></a>
+<a href="{% url 'blog:post_delete' pk=post.pk %}">Delete post <i class="fas fa-trash-alt delete_icon"></i></a>
 <br>
-<a href="{% url 'blog:post_update' pk=post.pk %}">Update </a> <i class="fas fa-edit"></i>
+<a href="{% url 'blog:post_update' pk=post.pk %}">Edit post</a> <i class="fas fa-edit"></i>
 {% endif %}
 
 {% endblock content %}

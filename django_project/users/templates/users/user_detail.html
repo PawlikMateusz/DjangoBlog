@@ -4,13 +4,21 @@
     <h4>
         <img class='ProfilePic ' src="{{ user.profile.image.url }}" alt="User Photo"> <strong>{{ user.username }}</strong>
     </h4>
-
+    <a href="{% url 'UserUpdate' %}">
+        <h6>Update username or email</h6>
+    </a>
+    <a href="{% url 'ProfileUpdate' %}">
+        <h6>Update your photo</h6>
+    </a>
     <ul>
         <li>
             <strong>Join date</strong> <br>{{ user.date_joined }}
         </li>
         <li>
             <strong>Last login date </strong><br>{{ user.last_login }}
+        </li>
+        <li>
+            <strong>Email </strong><br>{{ user.email }}
         </li>
         {% if user.post_set.first %}
         <li>

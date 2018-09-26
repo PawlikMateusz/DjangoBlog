@@ -1,6 +1,7 @@
 {% extends "blog/base.html" %}
 {% load crispy_forms_tags %}
 {% block content %}
+<h3>Edit your post</h3>
 <form method="post" class="postFormWidth">
     {% csrf_token %}
     {{ form|crispy }}

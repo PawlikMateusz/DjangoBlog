@@ -2,7 +2,7 @@ from django.shortcuts import render
 from blog.models import Post
 from django.contrib.auth.models import User
 from django.urls import reverse_lazy
-from django.views.generic import UpdateView, TemplateView, CreateView, ListView, DetailView, DeleteView
+from django.views.generic import FormView, UpdateView, TemplateView, CreateView, ListView, DetailView, DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.messages.views import SuccessMessageMixin
 from django.contrib import messages
@@ -56,6 +56,7 @@ class DeletePostView(DeleteView):
 
 class UpdatePostView(SuccessMessageMixin, UpdateView):
     model = Post
+    template_name = 'blog/post_update_form.html'
     fields = ['title', 'content']
     success_message = "Post was updated successfully"
 

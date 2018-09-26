@@ -15,7 +15,11 @@
         </h4>
         <ul>
             <li>
+                {% if post.content|length > 300 %}
+                {{ post.content|slice:":300" }} ... <a href="{% url 'blog:post_detail' pk=post.pk %}"> Read Post</a>
+                {% else %}
                 {{ post.content }}
+                {% endif %}
             </li>
             <li>
                 {{ post.date_posted|date:"d.m.Y, H:i" }}

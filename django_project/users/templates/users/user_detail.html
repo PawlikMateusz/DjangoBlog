@@ -1,43 +1,45 @@
 {% extends "blog/base.html" %}
 {% block content %}
-<ul>
-    <h4>
-        <img class='ProfilePic ' src="{{ user.profile.image.url }}" alt="User Photo"> <strong>{{ user.username }}</strong>
-    </h4>
-    <a href="{% url 'UserUpdate' %}">
-        <h6>Update username or email</h6>
-    </a>
-    <a href="{% url 'ProfileUpdate' %}">
-        <h6>Update your photo</h6>
-    </a>
-    <ul>
-        <li>
-            <strong>Join date</strong> <br>{{ user.date_joined }}
-        </li>
-        <li>
-            <strong>Last login date </strong><br>{{ user.last_login }}
-        </li>
-        <li>
-            <strong>Email </strong><br>{{ user.email }}
-        </li>
-        {% if user.post_set.first %}
-        <li>
-            <strong> My posts:</strong>
-            <ul>
+<div class="row">
+    <div class="col-md-4">
+
+        <div class="username">
+            <img style="margin-bottom:15px;" src="{{ user.profile.image.url }}" alt="User Photo">
+            <h4>
+                <strong>{{ user.username }}</strong>
+            </h4>
+            <a href="{% url 'UserUpdate' %}"><button class="btn btn-success profile_buttons">Edit my profile
+                    <i class="fas fa-edit" style="color:white;"></i></button></a>
+            <a href="{% url 'ProfileUpdate' %}"><button class="btn btn-success profile_buttons">Edit your photo
+                    <i class="fas fa-edit" style="color:white;"></i></button></a>
+
+        </div>
+        <div class="profile_info">
+
+            <p><strong>Join date</strong> <br>{{ user.date_joined|date:"F j, Y" }}</p>
+            <p><strong>Last login date </strong><br>{{ user.last_login|date:"F j, Y" }}</p>
+            <p><strong>Email </strong><br>{{ user.email }}</p>
+        </div>
+
+    </div>
+
+    <div class="col-md-8">
+        <div class="card">
+            <h5 class="card-header"><strong>Your posts</strong></h5>
+            <div class="card-body">
+                {% if user.post_set.first %}
                 {% for post in user.post_set.all %}
-                <li>
-                    <a href="{% url 'blog:post_detail' pk=post.pk %}"> {{ post.title }} <i class="fas fa-edit"></i></a>
-                </li>
+                <h5 class="card-title"><a id="post_title_ProfileSite" href="{% url 'blog:post_detail' pk=post.pk %}">
+                        {{ post.title }} <i class="fas fa-edit"></i></a>
+                </h5>
+                Posted on <strong>{{ post.date_posted|date:"F j, Y" }}</strong>
+                <hr id="hrLine">
                 {% endfor %}
-
-            </ul>
-        </li>
-
-        {% else %}
-        <li>
-            <strong>User didnt wrire anything :/</strong>
-        </li>
-        {% endif %}
-    </ul>
-</ul>
+                {% else %}
+                <strong>We dont have anything yet :/</strong>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
 {% endblock content %}

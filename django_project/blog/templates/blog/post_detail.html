@@ -1,31 +1,40 @@
 {% extends "blog/base.html" %}
 {% block content %}
 
-
-
-<ul>
-    <li>
+<div class="post">
+    <div class="author">
+        <p>
+            {% if post.author.profile.image %}
+            <img src="{{ post.author.profile.image.url }}" class="ProfilePic" alt="">
+            {% endif %}
+            by <strong><a href="{% url 'blog:userPostsView' pk=post.author.username %}">{{ post.author }}</a></strong>
+            on <strong>{{ post.date_posted|date:"F j, Y" }}</strong>
+        </p>
+        {% if user.is_authenticated and object.author == user %}
+        <div style="display: inline-block;">
+            <a href="{% url 'blog:post_update' pk=post.pk %}"><button class="btn btn-success btn-xs">Edit
+                    Post <i class="fas fa-edit"></i></button></a>
+            <a href="{% url 'blog:post_delete' pk=post.pk %}"><button class="btn btn-danger btn-xs">Delete
+                    Post <i class="fas fa-trash-alt delete_icon" style="color:white;"></i></button></a>
+        </div>
+        {% endif %}
+    </div>
+    <hr id="hrLine">
+    <div class="title" style="margin-top:30px;">
         <h4>
-            {{ object.title }}
+            <a href="{% url 'blog:post_detail' pk=post.pk %}">{{ post.title }}</a>
         </h4>
-        <ul>
-            <li>
-                {{ object.content }}
-            </li>
-            <li>
-                {{ object.date_posted }}
-            </li>
-            <li>
-                <a href="{% url 'blog:userPostsView' pk=object.author.username %}">{{ object.author }}</a>
-            </li>
-        </ul>
-    </li>
-</ul>
-{% if user.is_authenticated and object.author == user %}
+    </div>
+    <div class="content" style="margin-top:30px;">
+        {{ post.content|safe }}
+    </div>
+</div>
 
-<a href="{% url 'blog:post_delete' pk=post.pk %}">Delete post <i class="fas fa-trash-alt delete_icon"></i></a>
-<br>
-<a href="{% url 'blog:post_update' pk=post.pk %}">Edit post</a> <i class="fas fa-edit"></i>
-{% endif %}
 
+
+<div id="post_detail_title">
+    <h4>
+        {{ object.title }}
+    </h4>
+</div>
 {% endblock content %}

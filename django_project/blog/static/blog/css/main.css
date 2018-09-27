@@ -13,6 +13,7 @@ body {
   }
   .PageContent{
     margin-top: 100px;
+    padding-bottom: 50px;
   }
   .bg-steel {
     background-color: #5f788a;
@@ -98,7 +99,74 @@ body {
   
   /* USER PROFILE CSS */
   .ProfilePic {
+    width: 200px;
+    height: 200px;
+    border-radius: 10%;
+  }
+  /* POST HOMEAGE STYLING */
+  .post{
+    padding-bottom: 20px;
+    padding-top: 20px;
+  }
+  .title > h4 > a {
+    text-decoration: none;
+    color: black;
+    font-weight: bold;
+    font-family: 'Lato', sans-serif;
+  }
+  #hrLine {
+    /* background-color: red;
+    border-top: 2px dotted #8c8b8b; */
+    border: 0;
+    height: 2px;
+    background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0));
+}
+  #post_detail_title > h4 {
+    text-decoration: none;
+    color: black;
+    font-weight: bold;
+    font-family: 'Lato', sans-serif;
+  }
+  .img_100{
+    width: 100%;
+    height: auto;
+  }
+  .img_80{
+    width: 80%;
+    height: auto;
+  }
+  .ProfilePic {
     width: 50px;
     height: 50px;
     border-radius: 50%;
+  }
+  .profile_buttons{
+    width: 100%;
+    margin-top: 15px;
+  }
+  .username{
+    text-align: center;
+    padding-top: 20px;
+  }
+  .profile_info{
+    padding-top: 20px;
+  }
+  #post_title_ProfileSite{
+    text-decoration: none;
+    color: black;
+    font-weight: bold;
+    font-size: 18px;
+    font-family: 'Lato', sans-serif;
+  }
+  #latestPosts{ 
+    text-shadow:1px 1px 1px rgba(130,130,130,1);
+    font-weight:normal;
+    text-transform:uppercase;
+    color:#000000;
+    letter-spacing:2pt;
+    word-spacing:2pt;
+    font-size:25px;
+    text-align:left;
+    font-family:arial black, sans-serif;
+    line-height:1;
   }

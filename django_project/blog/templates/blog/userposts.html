@@ -1,34 +1,42 @@
 {% extends "blog/base.html" %}
 {% block content %}
 
-
-<h1>{{ object_list.first.author }} posts list:</h1>
-<ul>
-    {% for post in object_list %}
-    <li>
-        <h4>
-            <a href="{% url 'blog:post_detail' pk=post.pk %}">{{ post.title }}
-                {% if post.author == user %}
-                <i class="fas fa-edit"></i>
-                {% endif %}
-            </a>
-        </h4>
-        <ul>
-            <li>
+<div class="card">
+    <h5 class="card-header">
+        {% if object_list.first.author.profile.image %}
+        <img src="{{ object_list.first.author.profile.image.url }}" class="ProfilePic" alt="">
+        {% endif %}
+        <strong>{{ object_list.first.author }}</strong> posts list ({{ object_list.first.author.post_set.all|length }}
+        posts) :
+    </h5>
+    <div class="card-body">
+        {% for post in object_list %}
+        <div class="post">
+            <div class="title">
+                <h4>
+                    <a href="{% url 'blog:post_detail' pk=post.pk %}">{{ post.title }}
+                        {% if post.author == user %}
+                        <i class="fas fa-edit"></i>
+                        {% endif %}
+                    </a>
+                </h4>
+            </div>
+            <div class="content">
                 {% if post.content|length > 300 %}
-                {{ post.content|slice:":300" }} ... <a href="{% url 'blog:post_detail' pk=post.pk %}"> Read Post</a>
+                {{ post.content|slice:":300"|safe }} ... <a href="{% url 'blog:post_detail' pk=post.pk %}"> Read more</a>
                 {% else %}
-                {{ post.content }}
+                {{ post.content|safe }}
                 {% endif %}
-            </li>
-            <li>
-                {{ post.date_posted|date:"d.m.Y, H:i" }}
-            </li>
-            <!-- <li>
-                <a href="{% url 'blog:userPostsView' pk=post.author.username %}">{{ post.author }}</a>
-            </li> -->
-        </ul>
-    </li>
-    {% endfor %}
-</ul>
+            </div>
+            <div class="author">
+                <p>
+                    posted on <strong>{{ post.date_posted|date:"F j, Y" }}</strong>
+                    by <strong><a href="{% url 'blog:userPostsView' pk=post.author.username %}">{{ post.author }}</a></strong>
+                </p>
+            </div>
+        </div>
+        <hr id="hrLine">
+        {% endfor %}
+    </div>
+</div>
 {% endblock content %}

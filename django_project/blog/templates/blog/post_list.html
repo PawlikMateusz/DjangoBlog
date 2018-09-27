@@ -1,11 +1,18 @@
 {% extends "blog/base.html" %}
 {% block content %}
-
-
-<h1>Post List:</h1>
-<ul>
-    {% for post in object_list %}
-    <li>
+<p id="latestPosts">Django Blog latest posts:</p>
+{% for post in object_list %}
+<div class="post">
+    <div class="author">
+        <p>
+            {% if post.author.profile.image %}
+            <img src="{{ post.author.profile.image.url }}" class="ProfilePic" alt="">
+            {% endif %}
+            by <strong><a href="{% url 'blog:userPostsView' pk=post.author.username %}">{{ post.author }}</a></strong>
+            on <strong>{{ post.date_posted|date:"F j, Y" }}</strong>
+        </p>
+    </div>
+    <div class="title">
         <h4>
             <a href="{% url 'blog:post_detail' pk=post.pk %}">{{ post.title }}
                 {% if post.author == user %}
@@ -13,25 +20,16 @@
                 {% endif %}
             </a>
         </h4>
-        <ul>
-            <li>
-                {% if post.content|length > 300 %}
-                {{ post.content|slice:":300" }} ... <a href="{% url 'blog:post_detail' pk=post.pk %}"> Read Post</a>
-                {% else %}
-                {{ post.content }}
-                {% endif %}
-            </li>
-            <li>
-                {{ post.date_posted|date:"d.m.Y, H:i" }}
-            </li>
-            <li>
-                {% if post.author.profile.image %}
-                <img src="{{ post.author.profile.image.url }}" class="ProfilePic" alt="">
-                {% endif %}
-                <a href="{% url 'blog:userPostsView' pk=post.author.username %}">{{ post.author }}</a>
-            </li>
-        </ul>
-    </li>
-    {% endfor %}
-</ul>
+    </div>
+    <div class="content">
+        {% if post.content|length > 300 %}
+        {{ post.content|slice:":300"|safe }} ... <a href="{% url 'blog:post_detail' pk=post.pk %}"> Read more</a>
+        {% else %}
+        {{ post.content|safe }}
+        {% endif %}
+    </div>
+</div>
+<hr id="hrLine">
+{% endfor %}
+
 {% endblock content %}

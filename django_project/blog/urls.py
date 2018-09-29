@@ -11,4 +11,8 @@ urlpatterns = [
     path('nopermissionwarning/',
          views.NoPermisionTemplateView.as_view(), name='nopermission'),
     path('users/<pk>/posts', views.UserPostsListView.as_view(), name='userPostsView'),
+    path('post_detail/<pk>/delete',
+         views.CommentDeleteView.as_view(), name='comment_delete'),
+    path('post_detail/<pk>/edit',
+         views.CommentEditView.as_view(), name='edit_comment'),
 ]

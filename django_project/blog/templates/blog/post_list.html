@@ -28,6 +28,10 @@
         {{ post.content|safe }}
         {% endif %}
     </div>
+    <div class="comment_info">
+        <a href="{% url 'blog:post_detail' pk=post.pk %}#post_detail_comments">See comments
+            ({{ post.comments.all.count }})</a>
+    </div>
 </div>
 <hr id="hrLine">
 {% endfor %}

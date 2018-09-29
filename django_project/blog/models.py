@@ -15,3 +15,11 @@ class Post(models.Model):
 # aby pobrać wszystkie posty uzytkonwika wystarczy:
 # userObject.post_set.all()
 # user.post_set.create(title='Blog3fsdf', content='bleble')
+
+
+class Comment(models.Model):
+    post = models.ForeignKey(
+        'blog.Post', on_delete=models.CASCADE, related_name='comments')
+    author = models.ForeignKey(User, on_delete=models.CASCADE)
+    text = models.TextField()
+    created_date = models.DateTimeField(default=timezone.now)

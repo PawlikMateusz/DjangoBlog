@@ -1,4 +1,5 @@
 {% extends "blog/base.html" %}
+{% load crispy_forms_tags %}
 {% block content %}
 
 <div class="post">
@@ -31,10 +32,51 @@
 </div>
 
 
+<div id="post_detail_comments">
 
-<div id="post_detail_title">
-    <h4>
-        {{ object.title }}
-    </h4>
+    <hr id="hrLine">
+    <h3>Post Comments:</h3>
+
+    {% for comment in post.comments.all %}
+
+    <div class="comment">
+        <div class="comment_author">
+            <img src="{{ comment.author.profile.image.url }}" class="ProfilePic" alt="">
+            <br>
+            <a href="{% url 'blog:userPostsView' pk=post.author.username %}">{{ comment.author }}</a>
+
+        </div>
+        <div class="comment_content">
+            {{ comment.text }} <br>
+            <span style="font-size:14px;">Posted {{ comment.created_date|timesince }} ago</span>
+            {% if user == comment.author %}
+            <br>
+            <a href="{% url 'blog:edit_comment' pk=comment.pk %}" style="color:orange;font-size:14px;">Edit
+                Comment <i class="fas fa-trash-alt delete_icon"></i></a>
+            <a href="{% url 'blog:comment_delete' pk=comment.pk %}" style="color:red;font-size:14px;">Delete
+                Comment <i class="fas fa-trash-alt delete_icon"></i></a>
+            {% endif %}
+        </div>
+    </div>
+
+    {% endfor %}
+
+    {% if user.is_authenticated %}
+    <h5>Add Comment:</h5>
+    <form method="post" class="commentForm">
+        {% csrf_token %}
+        {{ form.text }}
+        {{ form.author.as_hidden }}
+        {{ form.post.as_hidden }}
+        <button type="submit" class="btn btn-success">Add comment</button>
+    </form>
+    {% else %}
+    <h5>
+        <a href="{% url 'login' %}">Click here</a> to login and add comment
+    </h5>
+    {% endif %}
 </div>
+
+
+
 {% endblock content %}

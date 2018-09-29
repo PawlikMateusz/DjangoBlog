@@ -40,6 +40,23 @@
                 {% endif %}
             </div>
         </div>
+        <div class="card" style="margin-top:50px;">
+            <h5 class="card-header"><strong>Your last 3 comments</strong></h5>
+            <div class="card-body">
+                {% if user.comment_set.first %}
+                {% for comment in user.comment_set.all|slice:"3:" reversed %}
+                <h5 class="card-title">
+                    <a id="post_title_ProfileSite" href="{% url 'blog:post_detail' pk=comment.post.pk %}#post_detail_comments">
+                        {{ comment.text }}</a>
+                </h5>
+                Added on <strong>{{ comment.created_date|date:"F j, Y" }}</strong>
+                <hr id="hrLine">
+                {% endfor %}
+                {% else %}
+                <strong>We dont have anything yet :/</strong>
+                {% endif %}
+            </div>
+        </div>
     </div>
 </div>
 {% endblock content %}

@@ -170,3 +170,30 @@ body {
     font-family:arial black, sans-serif;
     line-height:1;
   }
+  .comment_author{
+    text-align: center;
+    width: fit-content;
+    height: 100%;
+    float: left;
+    min-width: 110px;
+  }
+  .comment_content{   
+    max-width: 600px; 
+    border-left: 5px solid #1C6EA4;
+    padding-left: 25px;
+    margin-left: 25px;
+    height: 100%;
+    float: left;
+    min-height: 80px;
+  }
+  .comment{
+    margin-bottom: 25px;
+    overflow: hidden;
+  }
+  .commentForm #id_text{
+    height: 100px;
+    width: 100%;
+  }
+  .commentForm{
+    width: 100%;
+  }

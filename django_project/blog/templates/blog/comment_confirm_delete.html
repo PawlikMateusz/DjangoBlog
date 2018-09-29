@@ -1,0 +1,13 @@
+{% extends "blog/base.html" %}
+{% block content %}
+<form method="post">
+    {% csrf_token %}
+    <h3>Are you sure you want to delete comment:
+        <h6>"{{ object.text }}" </h6> <br> related to the post:
+        <h6><strong>Post Title: </strong>{{ object.post.title }}</h6>
+    </h3>
+    <input class="btn btn-danger" type="submit" value="Delete">
+
+</form>
+<a href="{% url 'blog:homePage' %}">Wróć do strony głownej</a>
+{% endblock content %}

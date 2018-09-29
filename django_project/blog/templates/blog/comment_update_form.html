@@ -1,0 +1,10 @@
+{% extends "blog/base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+<h3>Edit your comment</h3>
+<form method="post" class="postFormWidth">
+    {% csrf_token %}
+    {{ form|crispy }}
+    <button type="submit" class="btn btn-success">Update comment</button>
+</form>
+{% endblock content %}
